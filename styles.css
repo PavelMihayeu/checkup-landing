@@ -43,9 +43,11 @@ body {
 .nav-logo {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #e91e63;
+    font-style: italic;
+    font-family: 'Dancing Script', 'Brush Script MT', cursive;
 }
 
 .nav-logo i {
@@ -54,9 +56,9 @@ body {
 }
 
 .logo-img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
     border-radius: 8px;
     object-fit: cover;
 }
@@ -159,7 +161,7 @@ body {
 :root {
 	--size: max(5px, 1vmin);
 	--height: 80em;
-	--pad: 1.25em;
+	--pad: 0.85em;
 	--border-radius: 6.666em;
 	--gutter: calc(var(--pad) * 2);
 	--scene-pad: 5vmin;
@@ -422,30 +424,31 @@ body {
 	transition-property: max-height, max-width, filter, transform;
 	will-change: max-width, max-height, filter;
 	
-	&:hover,
-	&:focus-within {
-		--shadow-opacity: 0.5;
-		transition-timing-function: var(--ease-spring);
+}
+
+.notch-container:hover,
+.notch-container:focus-within {
+	--shadow-opacity: 0.5;
+	transition-timing-function: var(--ease-spring);
+	
+	.content {
+		--content-padding: 2em;
 		
-		.content {
-			--content-padding: 2em;
-			
-			.text {
-				opacity: 1;
-			}
-		}
-		
-		.notch {
-			max-width: 100%;
-			max-height: 100%;
-			pointer-events: all;
-			transform: scale3d(1,1,1);
-		}
-		
-		~ .notch-blur {
+		.text {
 			opacity: 1;
-			max-height: calc(var(--notch-radius) * 3.333 + var(--pad));
 		}
+	}
+	
+	.notch {
+		max-width: 100%;
+		max-height: 100%;
+		pointer-events: all;
+		transform: scale3d(1,1,1);
+	}
+	
+	~ .notch-blur {
+		opacity: 1;
+		max-height: calc(var(--notch-radius) * 3.333 + var(--pad));
 	}
 }
 
@@ -490,13 +493,14 @@ body {
 	transform: scale3d(0.375,0.4,1);
 	transform-origin: top;
 
-	&:before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: black;
-		border-radius: inherit;
-	}
+}
+
+.notch:before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: black;
+	border-radius: inherit;
 }
 
 .content {
@@ -540,41 +544,46 @@ body {
 		
 		opacity: var(--bar-opacity, 0);
 		
-		&:before {
-			content: 'My Ona Checkup';
-			order: 1;
-			text-transform: uppercase;
-		}
+}
 
-		&:after {
-			order: 2;
-			content: 'Health Tracking';
-			opacity: 0.5;
-		}
-	}
+.text:before {
+	content: '';
+	order: 1;
+	width: 0;
+	height: 0;
+}
+
+.text:after {
+	order: 2;
+	content: '';
+	opacity: 0;
+	font-size: 0.8em;
+	font-weight: 500;
+}
 	
 	.right {
 		flex-grow: 1;
 	}
 	
 	.tile {
-		background: #e91e63;
+		background: transparent;
 		height: 100%;
 		aspect-ratio: 1;
 		border-radius: 33.3%;
 		position: relative;
 		
-		&:before {
-			content: '';
-			position: absolute;
-			inset: 0;
-			border-radius: 50%;
-			
-			background: radial-gradient(50% 50% at 55% 40%, #e91e63, #f8bbd9 75%, transparent) center / 133.3% 133.3%;
-			background-color: #e91e63;
-			filter: blur(0.05em);
-		}
-	}
+}
+
+.tile:before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	background-image: url('images/logo.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
 	
 	.bar {
 		display: flex;
